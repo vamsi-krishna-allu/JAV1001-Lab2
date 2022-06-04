@@ -92,6 +92,21 @@ public class ArrayTools {
         return arrayLength;
     }
 
+    /**
+     * This method converts given input array to string with space between each
+     * element of array
+     * 
+     * @param inputArray
+     * @return
+     */
+    private static String getArrayAsString(int[] inputArray) {
+        String arrayAsString = "";
+        for (int currentValue : inputArray) {
+            arrayAsString = arrayAsString + " " + currentValue;
+        }
+        return arrayAsString;
+    }
+
     public static void main(String[] args) throws Exception {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter a string to encrypt.");
@@ -116,11 +131,8 @@ public class ArrayTools {
             }
 
             int[] reversedArray = reverse(inputArray);
-            String reversedArrayAsString = "";
             // reversed array is converted to string to show it properly in output
-            for (int index = 0; index < getArrayLength(reversedArray); index++) {
-                reversedArrayAsString = reversedArrayAsString + " " + reversedArray[index];
-            }
+            String reversedArrayAsString = getArrayAsString(reversedArray);
             System.out.println("The array reversed is [" + reversedArrayAsString + " ]");
         }
     }
