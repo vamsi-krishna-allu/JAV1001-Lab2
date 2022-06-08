@@ -109,6 +109,8 @@ public class ArrayTools {
 
     /**
      * In ACII characters elements from 127 to 159 are not printable
+     * and the ACII values from 0 to 32 have special means and cant be
+     * printed
      * so this method replaces all characters that are not printable to ?
      * 
      * @param valueAfterEncryption
@@ -117,9 +119,10 @@ public class ArrayTools {
     private static String getValueWithPrintableCharacters(String valueAfterEncryption) {
         String valueToBePrinted = "";
         for (int index = 0; index < valueAfterEncryption.length(); index++) {
-            if(valueAfterEncryption.charAt(index) >=127 && valueAfterEncryption.charAt(index) <=159){
+            if ((valueAfterEncryption.charAt(index) >= 127 && valueAfterEncryption.charAt(index) <= 159) ||
+                    (valueAfterEncryption.charAt(index) <= 32 && valueAfterEncryption.charAt(index) >= 0)) {
                 valueToBePrinted += "?";
-            }else{
+            } else {
                 valueToBePrinted += valueAfterEncryption.charAt(index);
             }
         }
@@ -136,7 +139,8 @@ public class ArrayTools {
             String valueWithPrintableCharacters = getValueWithPrintableCharacters(valueAfterEncryption);
             System.out.println("The encrypted string is " + valueWithPrintableCharacters);
             System.out.println("Decrypting " + valueWithPrintableCharacters + " with -" + shiftValue + "...");
-            // we dont need to check for value with printable characters while decrypting as user can't enter the values that are not printable
+            // we dont need to check for value with printable characters while decrypting as
+            // user can't enter the values that are not printable
             System.out.println(encrypt(valueAfterEncryption, (-1 * shiftValue)));
 
             int[] inputArray = { 44, 78, 45, 77, 44, 98, 67, 68, 91, 54 };
