@@ -19,7 +19,7 @@ public class ArrayTools {
         String valueAfterEncryption = "";
         for (int index = 0; index < valueToBeEncrypted.length(); index++) {
             char characterAfterShift = (char) (valueToBeEncrypted.charAt(index) + shiftValue);
-            valueAfterEncryption = valueAfterEncryption + characterAfterShift;
+            valueAfterEncryption += characterAfterShift;
         }
         return valueAfterEncryption;
     }
@@ -36,7 +36,7 @@ public class ArrayTools {
         int arrayLength = getArrayLength(inputArray);
         double sumOfData = 0;
         for (int currentValue : inputArray) {
-            sumOfData = sumOfData + currentValue;
+            sumOfData += currentValue;
         }
         // Ternary condition to verify if input array size is zero to avoid exception
         // due to divide by zero
@@ -102,7 +102,7 @@ public class ArrayTools {
     private static String getArrayAsString(int[] inputArray) {
         String arrayAsString = "";
         for (int currentValue : inputArray) {
-            arrayAsString = arrayAsString + " " + currentValue;
+            arrayAsString += " " + currentValue;
         }
         return arrayAsString;
     }
@@ -118,9 +118,9 @@ public class ArrayTools {
         String valueToBePrinted = "";
         for (int index = 0; index < valueAfterEncryption.length(); index++) {
             if(valueAfterEncryption.charAt(index) >=127 && valueAfterEncryption.charAt(index) <=159){
-                valueToBePrinted = valueToBePrinted + "?";
+                valueToBePrinted += "?";
             }else{
-                valueToBePrinted = valueToBePrinted + valueAfterEncryption.charAt(index);
+                valueToBePrinted += valueAfterEncryption.charAt(index);
             }
         }
         return valueToBePrinted;
