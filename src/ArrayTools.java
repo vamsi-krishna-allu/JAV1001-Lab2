@@ -107,22 +107,43 @@ public class ArrayTools {
         return arrayAsString;
     }
 
+    /**
+     * In ACII characters elements from 127 to 159 are not printable
+     * so this method replaces all characters that are not printable to ?
+     * 
+     * @param valueAfterEncryption
+     * @return
+     */
+    private static String getValueWithPrintableCharacters(String valueAfterEncryption) {
+        String valueToBePrinted = "";
+        for (int index = 0; index < valueAfterEncryption.length(); index++) {
+            if(valueAfterEncryption.charAt(index) >=127 && valueAfterEncryption.charAt(index) <=159){
+                valueToBePrinted = valueToBePrinted + "?";
+            }else{
+                valueToBePrinted = valueToBePrinted + valueAfterEncryption.charAt(index);
+            }
+        }
+        return valueToBePrinted;
+    }
+
     public static void main(String[] args) throws Exception {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Enter a string to encrypt.");
+            System.out.print("Enter a string to encrypt. ");
             String valueToBeEncrypted = scanner.next();
-            System.out.print("Enter a value to encrypt with.");
+            System.out.print("Enter a value to encrypt with. ");
             int shiftValue = scanner.nextInt();
             String valueAfterEncryption = encrypt(valueToBeEncrypted, shiftValue);
-            System.out.println("The encrypted string is " + valueAfterEncryption);
-            System.out.println("Decrypting " + valueAfterEncryption + " with -" + shiftValue + "...");
+            String valueWithPrintableCharacters = getValueWithPrintableCharacters(valueAfterEncryption);
+            System.out.println("The encrypted string is " + valueWithPrintableCharacters);
+            System.out.println("Decrypting " + valueWithPrintableCharacters + " with -" + shiftValue + "...");
+            // we dont need to check for value with printable characters while decrypting as user can't enter the values that are not printable
             System.out.println(encrypt(valueAfterEncryption, (-1 * shiftValue)));
 
             int[] inputArray = { 44, 78, 45, 77, 44, 98, 67, 68, 91, 54 };
             System.out.println("Testing methods with [ 44 78 45 77 44 98 67 68 91 54 ]");
             System.out.println("The average is " + arrayAvg(inputArray));
 
-            System.out.println("Enter a value to search for. ");
+            System.out.print("Enter a value to search for. ");
             int searchValue = scanner.nextInt();
             if (arrayContains(inputArray, searchValue)) {
                 System.out.println("The array contains " + searchValue);
